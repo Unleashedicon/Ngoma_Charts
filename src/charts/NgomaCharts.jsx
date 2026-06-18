@@ -810,6 +810,13 @@ export default function NgomaCharts(){
     window.addEventListener('hashchange',onHash);
     return()=>window.removeEventListener('hashchange',onHash);
   },[]);
+  useEffect(()=>{
+    const prevBg=document.body.style.background;
+    const prevColor=document.body.style.color;
+    document.body.style.background='#ffffff';
+    document.body.style.color='#050505';
+    return()=>{document.body.style.background=prevBg;document.body.style.color=prevColor;};
+  },[]);
   const [ct,setCt]=useState("singles");
   const [month,setMonth]=useState(CURRENT_MONTH);
   const [plat,setPlat]=useState("Combined");
