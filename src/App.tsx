@@ -6,12 +6,10 @@ import { PlatformsSection } from '@/sections/PlatformsSection';
 import { ExploreCharts } from '@/sections/ExploreCharts';
 import { NewsSection } from '@/sections/NewsSection';
 import { FooterSection } from '@/sections/FooterSection';
+import { CHARTS_APP_URL } from '@/lib/config';
 
 function App() {
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  const openCharts = () => window.open(`${CHARTS_APP_URL}/#charts`, '_blank', 'noopener,noreferrer');
 
   return (
     <div className="relative overflow-x-clip" style={{ fontFamily: "'Kanit', sans-serif" }}>
@@ -27,8 +25,8 @@ function App() {
           primaryCtaMobile="Explore"
           secondaryCta="View Rankings"
           secondaryCtaMobile="Rankings"
-          onPrimaryClick={() => scrollTo('explore')}
-          onSecondaryClick={() => scrollTo('charts')}
+          onPrimaryClick={openCharts}
+          onSecondaryClick={openCharts}
         />
       </div>
 

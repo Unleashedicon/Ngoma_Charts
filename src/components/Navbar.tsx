@@ -1,6 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from '@/hooks/useTheme';
 import { Sun, Moon, Menu, X } from 'lucide-react';
+import { CHARTS_APP_URL } from '@/lib/config';
+
+const navLinks = [
+  { label: 'Charts',    hash: 'charts' },
+  { label: 'Trending',  hash: 'trending' },
+  { label: 'Artists',   hash: 'artists' },
+  { label: 'Analytics', hash: 'analytics' },
+  { label: 'Records',   hash: 'records' },
+  { label: 'Year End',  hash: 'year-end' },
+  { label: 'News',      hash: 'news' },
+];
 
 export function Navbar() {
   const { isDark, toggle } = useTheme();
@@ -13,21 +24,15 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  const goTo = (hash: string) => {
+    window.open(`${CHARTS_APP_URL}/#${hash}`, '_blank', 'noopener,noreferrer');
     setMenuOpen(false);
   };
 
-  const navLinks = [
-    { label: 'Charts',   target: 'charts' },
-    { label: 'Trending', target: 'charts' },
-    { label: 'Artists',  target: 'explore' },
-    { label: 'Analytics',target: 'explore' },
-    { label: 'Records',  target: 'explore' },
-    { label: 'Year End', target: 'explore' },
-    { label: 'News',     target: 'news' },
-  ];
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMenuOpen(false);
+  };
 
   return (
     <nav
@@ -47,7 +52,7 @@ export function Navbar() {
       <div className="flex items-center justify-between px-4 sm:px-6 md:px-10 py-3 sm:py-4">
         {/* Logo */}
         <button
-          onClick={() => scrollTo('hero')}
+          onClick={scrollToTop}
           className="flex items-baseline gap-1 shrink-0"
         >
           <span className="text-lg sm:text-xl md:text-2xl font-black uppercase tracking-tight text-[#F4F3EF]">
@@ -66,7 +71,7 @@ export function Navbar() {
           {navLinks.map((link) => (
             <button
               key={link.label}
-              onClick={() => scrollTo(link.target)}
+              onClick={() => goTo(link.hash)}
               className={`px-3 py-1.5 rounded-full text-xs font-medium uppercase tracking-wider transition-all ${
                 link.label === 'Charts'
                   ? 'bg-[#2A2316] text-[#F4F3EF]'
@@ -118,7 +123,7 @@ export function Navbar() {
           {navLinks.map((link) => (
             <button
               key={link.label}
-              onClick={() => scrollTo(link.target)}
+              onClick={() => goTo(link.hash)}
               className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium uppercase tracking-wider transition-colors ${
                 link.label === 'Charts'
                   ? 'bg-[#2A2316] text-[#F4F3EF]'

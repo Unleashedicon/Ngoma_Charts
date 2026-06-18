@@ -1,30 +1,59 @@
-import { FadeIn } from "@/components/FadeIn";
+import { useState, useEffect } from 'react';
+import { FadeIn } from '@/components/FadeIn';
+import { API_BASE, CHARTS_APP_URL } from '@/lib/config';
 
-const NEWS = [
+type NewsItem = {
+  image: string;
+  date: string;
+  title: string;
+  excerpt: string;
+};
+
+const STATIC_NEWS: NewsItem[] = [
   {
-    image: "/news/news-1.png",
-    date: "Apr 12, 2026",
-    title: "Midnight Frequencies is out on every platform",
-    excerpt:
-      "The new album lands on Spotify, Apple Music, Audiomack, Boomplay and more — here's the story behind the record.",
+    image: '/news/news-1.png',
+    date: 'Apr 12, 2026',
+    title: 'Midnight Frequencies is out on every platform',
+    excerpt: 'The new album lands on Spotify, Apple Music, Audiomack, Boomplay and more — here\'s the story behind the record.',
   },
   {
-    image: "/news/news-2.png",
-    date: "Mar 28, 2026",
-    title: "Inside my 2026 studio and production workflow",
-    excerpt:
-      "The gear, plugins, and habits i rely on to write, produce, and mix records faster without losing the feel.",
+    image: '/news/news-2.png',
+    date: 'Mar 28, 2026',
+    title: 'Inside the 2026 studio and production workflow',
+    excerpt: 'The gear, plugins, and habits relied on to write, produce, and mix records faster without losing the feel.',
   },
   {
-    image: "/news/news-3.png",
-    date: "Mar 09, 2026",
-    title: "Announcing the Solaris EP tour dates",
-    excerpt:
-      "Live shows are coming. Here's where to catch the Solaris EP performed front to back this summer.",
+    image: '/news/news-3.png',
+    date: 'Mar 09, 2026',
+    title: 'Announcing the Solaris EP tour dates',
+    excerpt: 'Live shows are coming. Here\'s where to catch the Solaris EP performed front to back this summer.',
   },
 ];
 
+const PLACEHOLDER_IMAGES = ['/news/news-1.png', '/news/news-2.png', '/news/news-3.png'];
+
 export function NewsSection() {
+  const [news, setNews] = useState<NewsItem[]>(STATIC_NEWS);
+
+  useEffect(() => {
+    fetch(`${API_BASE}/news/`)
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length) {
+          const mapped: NewsItem[] = data.slice(0, 3).map((item: any, i: number) => ({
+            image: PLACEHOLDER_IMAGES[i % 3],
+            date: new Date(item.published_at).toLocaleDateString('en-US', {
+              month: 'short', day: 'numeric', year: 'numeric',
+            }),
+            title: item.title,
+            excerpt: item.excerpt || '',
+          }));
+          setNews(mapped);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <section
       id="news"
@@ -32,13 +61,13 @@ export function NewsSection() {
     >
       <h2
         className="font-black uppercase leading-none tracking-tight text-center text-white mb-16 sm:mb-20 md:mb-28"
-        style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
+        style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
       >
         News
       </h2>
 
       <div className="mx-auto grid max-w-6xl gap-6 sm:gap-8 md:grid-cols-3">
-        {NEWS.map((item, i) => (
+        {news.map((item, i) => (
           <FadeIn key={item.title} delay={i * 0.1} y={40}>
             <article className="group flex flex-col gap-5">
               <div className="overflow-hidden rounded-[28px] sm:rounded-[32px]">
@@ -59,7 +88,9 @@ export function NewsSection() {
                 {item.excerpt}
               </p>
               <a
-                href="#news"
+                href={`${CHARTS_APP_URL}/#news`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-[#D7E2EA] uppercase tracking-widest text-xs font-medium transition-opacity duration-200 hover:opacity-70"
               >
                 Read more

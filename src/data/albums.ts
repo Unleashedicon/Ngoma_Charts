@@ -16,16 +16,16 @@ export const albums: Album[] = [
 ];
 
 export const chartEntries: ChartEntry[] = [
-  { rank: 1, title: 'Finale', artist: 'Bien & Alikiba', coverUrl: '/album-covers/album-05.jpg', movement: 'same' },
-  { rank: 2, title: 'Nairobi Nights', artist: 'Sauti Sol', coverUrl: '/album-covers/album-06.jpg', movement: 'up', movementDelta: 3 },
-  { rank: 3, title: 'Tribal Echoes', artist: 'Fena Gitu', coverUrl: '/album-covers/album-03.jpg', movement: 'down', movementDelta: 1 },
-  { rank: 4, title: 'Golden Hour', artist: 'Nviiri the Storyteller', coverUrl: '/album-covers/album-02.jpg', movement: 'up', movementDelta: 5 },
-  { rank: 5, title: 'Mwaka Mpya', artist: 'Khaligraph Jones', coverUrl: '/album-covers/album-08.jpg', movement: 'same' },
-  { rank: 6, title: 'Liquid Chrome', artist: 'Bensoul', coverUrl: '/album-covers/album-07.jpg', movement: 'new' },
-  { rank: 7, title: 'Sherehe', artist: 'Otile Brown', coverUrl: '/album-covers/album-04.jpg', movement: 'down', movementDelta: 2 },
-  { rank: 8, title: 'Nebula Dreams', artist: 'Nikita Kering', coverUrl: '/album-covers/album-01.jpg', movement: 'up', movementDelta: 4 },
-  { rank: 9, title: 'Enchanted Woods', artist: 'Wangechi', coverUrl: '/album-covers/album-10.jpg', movement: 'same' },
-  { rank: 10, title: 'Vinyl Classics', artist: 'Chris Kaiga', coverUrl: '/album-covers/album-11.jpg', movement: 'new' },
+  { rank: 1,  title: 'Finale',                   artist: 'Bien ft. Alikiba',              coverUrl: '/album-covers/album-05.jpg', movement: 'same' },
+  { rank: 2,  title: 'Chai ya saa kumi',          artist: 'Ywaya Tajiri',                  coverUrl: '/album-covers/album-06.jpg', movement: 'up',   movementDelta: 2 },
+  { rank: 3,  title: 'AYAYAAH',                   artist: 'ELEMENT EleéeH ft. Bien',       coverUrl: '/album-covers/album-03.jpg', movement: 'new' },
+  { rank: 4,  title: 'LAST DANCE',                artist: 'Wakadinali',                    coverUrl: '/album-covers/album-02.jpg', movement: 'up',   movementDelta: 3 },
+  { rank: 5,  title: 'Siaka',                     artist: 'Mejja ft. Fik Fameica',         coverUrl: '/album-covers/album-08.jpg', movement: 'down', movementDelta: 1 },
+  { rank: 6,  title: 'Mdomo uliponza kichwa',     artist: 'Soul Touch Brand',              coverUrl: '/album-covers/album-07.jpg', movement: 'new' },
+  { rank: 7,  title: 'Pawa',                      artist: 'Mbosso',                        coverUrl: '/album-covers/album-04.jpg', movement: 'down', movementDelta: 2 },
+  { rank: 8,  title: 'Mfisadi',                   artist: 'Toxic Lyrikali ft. Dyana Cods', coverUrl: '/album-covers/album-01.jpg', movement: 'up',   movementDelta: 4 },
+  { rank: 9,  title: 'Panic',                     artist: 'Vybz Kartel ft. Shenseea',      coverUrl: '/album-covers/album-10.jpg', movement: 'new' },
+  { rank: 10, title: 'Rapudo',                    artist: 'Prince Indah',                  coverUrl: '/album-covers/album-11.jpg', movement: 'same' },
 ];
 
 export const exploreCards = [

@@ -1,9 +1,11 @@
 import { ArrowRight, ArrowUp, ArrowDown, Minus } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import type { ChartMovement } from '@/types';
+import type { ChartEntry, ChartMovement } from '@/types';
 import { FadeIn } from '@/components/FadeIn';
-import { chartEntries } from '@/data/albums';
+import { chartEntries as staticEntries } from '@/data/albums';
 import { CoverflowRing } from '@/components/CoverflowRing';
+import { API_BASE, CHARTS_APP_URL } from '@/lib/config';
 
 interface MovementBadgeProps {
   movement: ChartMovement;
@@ -44,9 +46,30 @@ function MovementBadge({ movement, size = 'sm' }: MovementBadgeProps) {
   );
 }
 
-const ringCovers = chartEntries.map((e) => ({ src: e.coverUrl, alt: e.title }));
+const COVER_POOL = staticEntries.map(e => e.coverUrl);
 
 export function ChartLeaderboard() {
+  const [chartEntries, setChartEntries] = useState<ChartEntry[]>(staticEntries);
+
+  useEffect(() => {
+    fetch(`${API_BASE}/charts/latest/?chart_type=singles&platform=combined`)
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data.entries) && data.entries.length) {
+          const mapped: ChartEntry[] = data.entries.slice(0, 10).map((e: any, i: number) => ({
+            rank: e.rank,
+            title: e.title,
+            artist: e.artist,
+            coverUrl: COVER_POOL[i] ?? '/album-covers/album-01.jpg',
+            movement: (['up','down','same','new'].includes(e.movement) ? e.movement : 'same') as ChartMovement,
+          }));
+          setChartEntries(mapped);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const ringCovers = chartEntries.map((e) => ({ src: e.coverUrl, alt: e.title }));
   const [leader, ...rest] = chartEntries;
 
   return (
@@ -60,6 +83,14 @@ export function ChartLeaderboard() {
             <p className="mx-auto mt-3 max-w-2xl text-sm text-[#9A9C9A] sm:text-base">
               The top performing songs across radio and streaming platforms in Kenya this week.
             </p>
+            <a
+              href={`${CHARTS_APP_URL}/#charts`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-5 text-xs uppercase tracking-widest text-[#A8800A] hover:text-[#c2990b] transition-colors"
+            >
+              View full Top 50 <ArrowRight className="h-3 w-3" />
+            </a>
           </div>
         </FadeIn>
       </div>
