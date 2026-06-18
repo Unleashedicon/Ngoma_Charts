@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from "react";
+import { useNavigate } from "react-router";
 import {
   BarChart,
   Bar,
@@ -817,7 +818,12 @@ export default function NgomaCharts(){
     document.body.style.color='#050505';
     return()=>{document.body.style.background=prevBg;document.body.style.color=prevColor;};
   },[]);
-  const [ct,setCt]=useState("singles");
+  const navigate=useNavigate();
+  const [ct,setCt]=useState(()=>{
+    if(typeof window==="undefined") return "singles";
+    const p=new URLSearchParams(window.location.search).get("ct");
+    return p==="albums"?"albums":"singles";
+  });
   const [month,setMonth]=useState(CURRENT_MONTH);
   const [plat,setPlat]=useState("Combined");
   const [vc,setVc]=useState(10);
@@ -2203,7 +2209,7 @@ const top = data[0];
           </div>
         </div>
           <div style={{...pageFrame({display:"flex",justifyContent:"space-between",alignItems:"center",padding:isMobile?"14px 16px":"18px 28px 22px"}),columnGap:isMobile?"16px":"60px",rowGap:"16px",flexWrap:"wrap"}}>
-          <div onClick={()=>navTo("charts")} style={{display:"flex",alignItems:"center",gap:"14px",cursor:"pointer"}}>
+          <div onClick={()=>navigate("/")} style={{display:"flex",alignItems:"center",gap:"14px",cursor:"pointer"}}>
             <svg width={isMobile?"24":"32"} height={isMobile?"26":"34"} viewBox="0 0 22 24" style={{flexShrink:0}}>
               <rect x="0" y="15" width="3.5" height="9" fill={themeColors.text} rx="0.5"/>
               <rect x="5.5" y="10" width="3.5" height="14" fill={themeColors.text} rx="0.5"/>

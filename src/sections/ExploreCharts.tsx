@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router';
 import { FadeIn } from '@/components/FadeIn';
 import { exploreCards } from '@/data/albums';
 
-const CARD_HASH: Record<string, string> = {
-  '01': 'charts',
-  '02': 'charts',
-  '03': 'year-end',
+const CARD_DEST: Record<string, string> = {
+  '01': '/app?ct=albums#charts',
+  '02': '/app#charts',
+  '03': '/app#year-end',
 };
 
 function ExploreCard({
@@ -64,7 +64,7 @@ function ExploreCard({
             </div>
           </div>
           <button
-            onClick={() => navigate(`/app#${CARD_HASH[card.number] ?? 'charts'}`)}
+            onClick={() => navigate(CARD_DEST[card.number] ?? '/app#charts')}
             className="shrink-0 rounded-full border-2 border-[#D7E2EA] px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm font-medium uppercase tracking-widest text-[#D7E2EA] transition-colors hover:bg-[#D7E2EA]/10"
           >
             View Chart
