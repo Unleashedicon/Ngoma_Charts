@@ -1,7 +1,14 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useNavigate } from 'react-router';
 import { FadeIn } from '@/components/FadeIn';
 import { exploreCards } from '@/data/albums';
+
+const CARD_HASH: Record<string, string> = {
+  '01': 'charts',
+  '02': 'charts',
+  '03': 'year-end',
+};
 
 function ExploreCard({
   card,
@@ -12,6 +19,7 @@ function ExploreCard({
   index: number;
   totalCards: number;
 }) {
+  const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -55,7 +63,10 @@ function ExploreCard({
               </h3>
             </div>
           </div>
-          <button className="shrink-0 rounded-full border-2 border-[#D7E2EA] px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm font-medium uppercase tracking-widest text-[#D7E2EA] transition-colors hover:bg-[#D7E2EA]/10">
+          <button
+            onClick={() => navigate(`/app#${CARD_HASH[card.number] ?? 'charts'}`)}
+            className="shrink-0 rounded-full border-2 border-[#D7E2EA] px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm font-medium uppercase tracking-widest text-[#D7E2EA] transition-colors hover:bg-[#D7E2EA]/10"
+          >
             View Chart
           </button>
         </div>

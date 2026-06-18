@@ -1,11 +1,12 @@
 import { ArrowRight, ArrowUp, ArrowDown, Minus } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 import { cn } from '@/lib/utils';
 import type { ChartEntry, ChartMovement } from '@/types';
 import { FadeIn } from '@/components/FadeIn';
 import { chartEntries as staticEntries } from '@/data/albums';
 import { CoverflowRing } from '@/components/CoverflowRing';
-import { API_BASE, CHARTS_APP_URL } from '@/lib/config';
+import { API_BASE } from '@/lib/config';
 
 interface MovementBadgeProps {
   movement: ChartMovement;
@@ -83,14 +84,12 @@ export function ChartLeaderboard() {
             <p className="mx-auto mt-3 max-w-2xl text-sm text-[#9A9C9A] sm:text-base">
               The top performing songs across radio and streaming platforms in Kenya this week.
             </p>
-            <a
-              href={`${CHARTS_APP_URL}/#charts`}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/app#charts"
               className="inline-flex items-center gap-2 mt-5 text-xs uppercase tracking-widest text-[#A8800A] hover:text-[#c2990b] transition-colors"
             >
               View full Top 50 <ArrowRight className="h-3 w-3" />
-            </a>
+            </Link>
           </div>
         </FadeIn>
       </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 import { FadeIn } from '@/components/FadeIn';
-import { API_BASE, CHARTS_APP_URL } from '@/lib/config';
+import { API_BASE } from '@/lib/config';
 
 type NewsItem = {
   image: string;
@@ -87,14 +88,12 @@ export function NewsSection() {
               <p className="text-[#D7E2EA]/60 font-light leading-relaxed text-sm sm:text-base text-pretty">
                 {item.excerpt}
               </p>
-              <a
-                href={`${CHARTS_APP_URL}/#news`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/app#news"
                 className="text-[#D7E2EA] uppercase tracking-widest text-xs font-medium transition-opacity duration-200 hover:opacity-70"
               >
                 Read more
-              </a>
+              </Link>
             </article>
           </FadeIn>
         ))}

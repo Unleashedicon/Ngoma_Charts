@@ -1,53 +1,24 @@
-import { Navbar } from '@/components/Navbar';
-import { PixelHero } from '@/components/ui/pixel-perfect-hero';
-import { BackgroundPaths } from '@/components/ui/background-paths';
-import { ChartLeaderboard } from '@/sections/ChartLeaderboard';
-import { PlatformsSection } from '@/sections/PlatformsSection';
-import { ExploreCharts } from '@/sections/ExploreCharts';
-import { NewsSection } from '@/sections/NewsSection';
-import { FooterSection } from '@/sections/FooterSection';
-import { CHARTS_APP_URL } from '@/lib/config';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router';
+import { LandingPage } from './LandingPage';
+
+const ChartsApp = lazy(() => import('./charts/NgomaCharts'));
 
 function App() {
-  const openCharts = () => window.open(`${CHARTS_APP_URL}/#charts`, '_blank', 'noopener,noreferrer');
-
   return (
-    <div className="relative overflow-x-clip" style={{ fontFamily: "'Kanit', sans-serif" }}>
-      <Navbar />
-
-      {/* 1. Hero — pixel canvas animation */}
-      <div id="hero">
-        <PixelHero
-          word1="Ngoma"
-          word2="Charts."
-          description="Aggregating Kenyan music charts across six platforms into a unified voice. Every beat, every rise, every number one — tracked in real time."
-          primaryCta="Explore Charts"
-          primaryCtaMobile="Explore"
-          secondaryCta="View Rankings"
-          secondaryCtaMobile="Rankings"
-          onPrimaryClick={openCharts}
-          onSecondaryClick={openCharts}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/app"
+          element={
+            <Suspense fallback={<div style={{ background: '#fff', minHeight: '100vh' }} />}>
+              <ChartsApp />
+            </Suspense>
+          }
         />
-      </div>
-
-      {/* 2. Music Rankings transition */}
-      <BackgroundPaths title="Music Rankings" />
-
-      {/* 3. Ngoma Top 10 chart */}
-      <ChartLeaderboard />
-
-      {/* 4. Platform coverage */}
-      <PlatformsSection />
-
-      {/* 5. Explore chart categories */}
-      <ExploreCharts />
-
-      {/* 6. News */}
-      <NewsSection />
-
-      {/* 7. Footer */}
-      <FooterSection />
-    </div>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

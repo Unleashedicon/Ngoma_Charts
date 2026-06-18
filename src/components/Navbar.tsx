@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import { useTheme } from '@/hooks/useTheme';
 import { Sun, Moon, Menu, X } from 'lucide-react';
-import { CHARTS_APP_URL } from '@/lib/config';
 
 const navLinks = [
   { label: 'Charts',    hash: 'charts' },
@@ -15,6 +15,7 @@ const navLinks = [
 
 export function Navbar() {
   const { isDark, toggle } = useTheme();
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -25,7 +26,7 @@ export function Navbar() {
   }, []);
 
   const goTo = (hash: string) => {
-    window.open(`${CHARTS_APP_URL}/#${hash}`, '_blank', 'noopener,noreferrer');
+    navigate(`/app#${hash}`);
     setMenuOpen(false);
   };
 
