@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router';
 import { Navbar } from '@/components/Navbar';
 import { PixelHero } from '@/components/ui/pixel-perfect-hero';
 import { BackgroundPaths } from '@/components/ui/background-paths';
@@ -8,10 +7,10 @@ import { ExploreCharts } from '@/sections/ExploreCharts';
 import { NewsSection } from '@/sections/NewsSection';
 import { FooterSection } from '@/sections/FooterSection';
 
-export function LandingPage() {
-  const navigate = useNavigate();
-  const openCharts = () => navigate('/app#charts');
+const scrollTo = (id: string) =>
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
+export function LandingPage() {
   return (
     <div className="relative overflow-x-clip bg-[var(--lp-bg)] min-h-screen" style={{ fontFamily: "'Kanit', sans-serif" }}>
       <Navbar />
@@ -26,8 +25,8 @@ export function LandingPage() {
           primaryCtaMobile="Explore"
           secondaryCta="View Rankings"
           secondaryCtaMobile="Rankings"
-          onPrimaryClick={openCharts}
-          onSecondaryClick={openCharts}
+          onPrimaryClick={() => scrollTo('explore')}
+          onSecondaryClick={() => scrollTo('charts')}
         />
       </div>
 
