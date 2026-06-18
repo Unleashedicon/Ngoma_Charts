@@ -790,7 +790,7 @@ const NEWS=[
   {id:18,date:"May 29, 2026",cat:"ANALYTICS",emoji:"",title:"Wrong Places Secures Platinum Status",excerpt:"Joshua Baraka & JAE5 total 408 points across nine months.",body:"Wrong Places appears in every tracked month and exceeds the new 400-point Platinum certification threshold."},
 ];
 
-const VALID_PAGES=["charts","analytics","records","year-end","certifications","news","about","trending","artists"];
+const VALID_PAGES=["charts","analytics","records","year-end","certifications","news","about"];
 
 export default function NgomaCharts(){
   const [page,setPage]=useState(()=>{
@@ -888,6 +888,10 @@ export default function NgomaCharts(){
     } catch {
       // Theme still works for the current session if storage is unavailable.
     }
+    return () => {
+      delete document.documentElement.dataset.ngomaTheme;
+      delete document.body.dataset.ngomaTheme;
+    };
   }, [theme]);
 
   const toggleYearEndRow = (rowKey) => {

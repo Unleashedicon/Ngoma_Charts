@@ -5,11 +5,10 @@ import { Sun, Moon, Menu, X } from 'lucide-react';
 
 const navLinks = [
   { label: 'Charts',    hash: 'charts' },
-  { label: 'Trending',  hash: 'trending' },
-  { label: 'Artists',   hash: 'artists' },
   { label: 'Analytics', hash: 'analytics' },
   { label: 'Records',   hash: 'records' },
   { label: 'Year End',  hash: 'year-end' },
+  { label: 'Certs',     hash: 'certifications' },
   { label: 'News',      hash: 'news' },
 ];
 

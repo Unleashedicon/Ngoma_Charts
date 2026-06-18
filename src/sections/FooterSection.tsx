@@ -6,11 +6,11 @@ import { useTheme } from "@/hooks/useTheme";
 import { FadeIn } from "@/components/FadeIn";
 
 const QUICK_LINKS = [
-  { label: 'Home',      action: 'home' },
-  { label: 'Charts',    action: 'charts' },
-  { label: 'Trending',  action: 'trending' },
-  { label: 'Artists',   action: 'artists' },
-  { label: 'News',      action: 'news' },
+  { label: 'Home',         action: 'home' },
+  { label: 'Charts',       action: 'charts' },
+  { label: 'Analytics',    action: 'analytics' },
+  { label: 'Year End',     action: 'year-end' },
+  { label: 'News',         action: 'news' },
 ];
 
 export function FooterSection() {

@@ -13,7 +13,7 @@ export function LandingPage() {
   const openCharts = () => navigate('/app#charts');
 
   return (
-    <div className="relative overflow-x-clip" style={{ fontFamily: "'Kanit', sans-serif" }}>
+    <div className="relative overflow-x-clip bg-[var(--lp-bg)] min-h-screen" style={{ fontFamily: "'Kanit', sans-serif" }}>
       <Navbar />
 
       {/* 1. Hero — pixel canvas animation */}

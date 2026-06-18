@@ -292,7 +292,7 @@ export function PixelHero({
 
   return (
     <section className={cn(
-      "relative w-full min-h-[100dvh] flex flex-col overflow-hidden transition-all duration-700",
+      "relative w-full min-h-[100dvh] flex flex-col overflow-hidden bg-[var(--lp-bg)] transition-opacity duration-700",
       isLoaded ? "opacity-100" : "opacity-0"
     )}>
       <style>{`
