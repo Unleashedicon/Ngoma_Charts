@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 2%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 2%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 2%;
+    --primary: 43 85% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 33% 94%;
+    --secondary-foreground: 0 0% 2%;
+    --muted: 40 20% 96%;
+    --muted-foreground: 0 0% 44%;
+    --accent: 43 85% 35%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 92%;
+    --input: 0 0% 92%;
+    --ring: 43 85% 35%;
+    --radius: 0.625rem;
+
+    /* Ngoma Charts Light Theme Tokens */
+    --ngoma-bg-base: #FFFFFF;
+    --ngoma-bg-hero-wash: #FDFCF8;
+    --ngoma-bg-utility-bar: #1A1A1A;
+    --ngoma-text-primary: #050505;
+    --ngoma-text-secondary: #6F7170;
+    --ngoma-text-tertiary: #746159;
+    --ngoma-accent-gold: #A8800A;
+    --ngoma-pill-active-bg: #F2E2BC;
+    --ngoma-divider: #EAEAEA;
+    --ngoma-rule-strong: #1A1A1A;
+  }
+
+  .dark {
+    --background: 0 0% 5%;
+    --foreground: 40 14% 95%;
+    --card: 0 0% 5%;
+    --card-foreground: 40 14% 95%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 40 14% 95%;
+    --primary: 43 85% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 40 14% 95%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 61%;
+    --accent: 43 85% 35%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 43 85% 35%;
+
+    /* Ngoma Charts Dark Theme Tokens */
+    --ngoma-bg-base: #0C0C0C;
+    --ngoma-bg-hero-wash: #141414;
+    --ngoma-bg-utility-bar: #1A1A1A;
+    --ngoma-text-primary: #F4F3EF;
+    --ngoma-text-secondary: #9A9C9A;
+    --ngoma-text-tertiary: #A89A8E;
+    --ngoma-accent-gold: #A8800A;
+    --ngoma-pill-active-bg: #2A2316;
+    --ngoma-divider: #262626;
+    --ngoma-rule-strong: #2E2E2E;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html, body, #root {
+    font-family: 'Kanit', sans-serif;
+    background-color: #0C0C0C;
+    color: #D7E2EA;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .hero-heading {
+    background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .animate-marquee {
+    animation: marquee 25s linear infinite;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes helixspin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+  }
+  .animate-helix {
+    animation: helixspin 24s linear infinite;
+  }
+  .animate-helix:hover {
+    animation-play-state: paused;
+  }
+  @keyframes shimmer-glass {
+    0% { background-position: 200% center; }
+    100% { background-position: 0% center; }
+  }
+  .tahoe-glass-text {
+    color: transparent;
+    background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 25%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.9) 55%, rgba(255,255,255,0.2) 75%, rgba(255,255,255,1) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.3);
+    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.4)) drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+    animation: shimmer-glass 8s linear infinite;
+  }
+}
