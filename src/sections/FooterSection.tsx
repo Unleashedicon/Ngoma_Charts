@@ -1,6 +1,6 @@
 "use client";
 
-import { Facebook, Instagram, Linkedin, Moon, Send, Sun, Twitter } from "lucide-react";
+import { Facebook, Instagram, Moon, Send, Sun } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useTheme } from "@/hooks/useTheme";
 import { FadeIn } from "@/components/FadeIn";
@@ -90,21 +90,33 @@ export function FooterSection() {
             <div className="relative">
               <h3 className="mb-4 text-lg font-semibold">Follow Us</h3>
               <div className="mb-6 flex space-x-4">
-                {[
-                  { Icon: Facebook, label: 'Facebook', href: '#' },
-                  { Icon: Twitter, label: 'Twitter', href: '#' },
-                  { Icon: Instagram, label: 'Instagram', href: '#' },
-                  { Icon: Linkedin, label: 'LinkedIn', href: '#' },
-                ].map(({ Icon, label, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-[var(--lp-border)] text-[var(--lp-text-muted)] hover:bg-[var(--lp-stripe)] hover:text-[var(--lp-gold)] transition-colors"
-                    aria-label={label}
-                  >
-                    <Icon className="h-4 w-4" />
-                  </a>
-                ))}
+                <a
+                  href="https://www.facebook.com/ngomacharts"
+                  target="_blank" rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-[var(--lp-border)] text-[var(--lp-text-muted)] hover:bg-[var(--lp-stripe)] hover:text-[var(--lp-gold)] transition-colors"
+                >
+                  <Facebook className="h-4 w-4" />
+                </a>
+                <a
+                  href="https://x.com/Ngoma_Charts"
+                  target="_blank" rel="noopener noreferrer"
+                  aria-label="X"
+                  className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-[var(--lp-border)] text-[var(--lp-text-muted)] hover:bg-[var(--lp-stripe)] hover:text-[var(--lp-gold)] transition-colors"
+                >
+                  {/* X (formerly Twitter) logo */}
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16.8 5h2.2l-4.8 5.5L20 19h-4.4l-3.5-4.6L8 19H5.8l5.1-5.9L5 5h4.5l3.1 4.2L16.8 5Zm-.8 12.6h1.2L9.1 6.3H7.8L16 17.6Z"/>
+                  </svg>
+                </a>
+                <a
+                  href="https://www.instagram.com/ngoma_charts/"
+                  target="_blank" rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-[var(--lp-border)] text-[var(--lp-text-muted)] hover:bg-[var(--lp-stripe)] hover:text-[var(--lp-gold)] transition-colors"
+                >
+                  <Instagram className="h-4 w-4" />
+                </a>
               </div>
               <div className="flex items-center gap-3">
                 <Sun className="h-4 w-4 text-[var(--lp-gold)]" />
