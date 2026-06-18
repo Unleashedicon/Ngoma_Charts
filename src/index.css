@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+  /* ── Tailwind semantic tokens ── */
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 2%;
@@ -25,17 +26,40 @@
     --ring: 43 85% 35%;
     --radius: 0.625rem;
 
-    /* Ngoma Charts Light Theme Tokens */
-    --ngoma-bg-base: #FFFFFF;
-    --ngoma-bg-hero-wash: #FDFCF8;
-    --ngoma-bg-utility-bar: #1A1A1A;
-    --ngoma-text-primary: #050505;
-    --ngoma-text-secondary: #6F7170;
-    --ngoma-text-tertiary: #746159;
-    --ngoma-accent-gold: #A8800A;
-    --ngoma-pill-active-bg: #F2E2BC;
-    --ngoma-divider: #EAEAEA;
-    --ngoma-rule-strong: #1A1A1A;
+    /* ── Landing page light mode tokens ── */
+    --lp-bg:           #F6F3ED;
+    --lp-surface:      #FFFFFF;
+    --lp-elevated:     #FDF9F2;
+    --lp-text:         #0E0E0C;
+    --lp-text-soft:    #4A4840;
+    --lp-text-muted:   #8A8780;
+    --lp-gold:         #B5810A;
+    --lp-gold-soft:    #FBF0D8;
+    --lp-gold-border:  rgba(181,129,10,0.30);
+    --lp-border:       #DED9CF;
+    --lp-border-strong:#C8C2B6;
+    --lp-card-bg:      #FFFFFF;
+    --lp-card-border:  #E8E4D9;
+    --lp-input-bg:     #EBE7DE;
+    --lp-stripe:       #F0EDE5;
+    --lp-utility-bar:  #EDE9E0;
+
+    /* heading gradient — warm charcoal on cream */
+    --hg-start: #5C5650;
+    --hg-end:   #1A1812;
+
+    /* glass text — dark ink shimmer on cream */
+    --glass-c1: rgba(14,14,12,1);
+    --glass-c2: rgba(14,14,12,0.45);
+    --glass-c3: rgba(14,14,12,0.12);
+    --glass-c4: rgba(14,14,12,0.85);
+    --glass-c5: rgba(14,14,12,0.22);
+    --glass-stroke: rgba(14,14,12,0.25);
+
+    /* legacy compat */
+    --ngoma-bg-base: #F6F3ED;
+    --ngoma-accent-gold: #B5810A;
+    --ngoma-divider: #DED9CF;
   }
 
   .dark {
@@ -59,17 +83,37 @@
     --input: 0 0% 15%;
     --ring: 43 85% 35%;
 
-    /* Ngoma Charts Dark Theme Tokens */
+    /* ── Landing page dark mode tokens ── */
+    --lp-bg:           #0C0C0C;
+    --lp-surface:      #111111;
+    --lp-elevated:     #161616;
+    --lp-text:         #D7E2EA;
+    --lp-text-soft:    #9A9C9A;
+    --lp-text-muted:   #646973;
+    --lp-gold:         #A8800A;
+    --lp-gold-soft:    #2A2316;
+    --lp-gold-border:  rgba(168,128,10,0.30);
+    --lp-border:       #1E1E1E;
+    --lp-border-strong:#2E2E2E;
+    --lp-card-bg:      #111111;
+    --lp-card-border:  #1E1E1E;
+    --lp-input-bg:     #141414;
+    --lp-stripe:       #161616;
+    --lp-utility-bar:  #1A1A1A;
+
+    --hg-start: #646973;
+    --hg-end:   #BBCCD7;
+
+    --glass-c1: rgba(255,255,255,1);
+    --glass-c2: rgba(255,255,255,0.4);
+    --glass-c3: rgba(255,255,255,0.1);
+    --glass-c4: rgba(255,255,255,0.9);
+    --glass-c5: rgba(255,255,255,0.2);
+    --glass-stroke: rgba(255,255,255,0.3);
+
     --ngoma-bg-base: #0C0C0C;
-    --ngoma-bg-hero-wash: #141414;
-    --ngoma-bg-utility-bar: #1A1A1A;
-    --ngoma-text-primary: #F4F3EF;
-    --ngoma-text-secondary: #9A9C9A;
-    --ngoma-text-tertiary: #A89A8E;
     --ngoma-accent-gold: #A8800A;
-    --ngoma-pill-active-bg: #2A2316;
     --ngoma-divider: #262626;
-    --ngoma-rule-strong: #2E2E2E;
   }
 }
 
@@ -79,11 +123,12 @@
   }
   html, body, #root {
     font-family: 'Kanit', sans-serif;
-    background-color: #0C0C0C;
-    color: #D7E2EA;
+    background-color: var(--lp-bg);
+    color: var(--lp-text);
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   body {
     overflow-x: hidden;
@@ -92,40 +137,48 @@
 
 @layer utilities {
   .hero-heading {
-    background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+    background: linear-gradient(180deg, var(--hg-start) 0%, var(--hg-end) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  .tahoe-glass-text {
+    color: transparent;
+    background: linear-gradient(
+      135deg,
+      var(--glass-c1) 0%,
+      var(--glass-c2) 25%,
+      var(--glass-c3) 45%,
+      var(--glass-c4) 55%,
+      var(--glass-c5) 75%,
+      var(--glass-c1) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 1.5px var(--glass-stroke);
+    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.18)) drop-shadow(0 5px 10px rgba(0,0,0,0.10));
+    animation: shimmer-glass 8s linear infinite;
+  }
+  @keyframes shimmer-glass {
+    0%   { background-position: 200% center; }
+    100% { background-position: 0%   center; }
+  }
+  @keyframes marquee {
+    0%   { transform: translateX(0%);   }
+    100% { transform: translateX(-50%); }
+  }
   .animate-marquee {
     animation: marquee 25s linear infinite;
   }
-  @keyframes marquee {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-50%); }
-  }
   @keyframes helixspin {
-    from { transform: rotateY(0deg); }
-    to { transform: rotateY(360deg); }
+    from { transform: rotateY(0deg);   }
+    to   { transform: rotateY(360deg); }
   }
   .animate-helix {
     animation: helixspin 24s linear infinite;
   }
   .animate-helix:hover {
     animation-play-state: paused;
-  }
-  @keyframes shimmer-glass {
-    0% { background-position: 200% center; }
-    100% { background-position: 0% center; }
-  }
-  .tahoe-glass-text {
-    color: transparent;
-    background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 25%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.9) 55%, rgba(255,255,255,0.2) 75%, rgba(255,255,255,1) 100%);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-stroke: 1.5px rgba(255,255,255,0.3);
-    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.4)) drop-shadow(0 5px 10px rgba(0,0,0,0.2));
-    animation: shimmer-glass 8s linear infinite;
   }
 }

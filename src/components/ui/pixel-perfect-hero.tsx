@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/hooks/useTheme";
 
 /* ---------------------------------------------------------------------------
  * MUSIC PLATFORM LOGO COMPONENTS
@@ -268,6 +269,7 @@ export function PixelHero({
   onPrimaryClick,
   onSecondaryClick,
 }: PixelHeroProps) {
+  const { isDark } = useTheme();
   const [isLoaded, setIsLoaded] = useState(false);
   const [themeColors, setThemeColors] = useState<string[]>([]);
 
@@ -286,7 +288,7 @@ export function PixelHero({
 
     const loadTimer = setTimeout(() => setIsLoaded(true), 50);
     return () => clearTimeout(loadTimer);
-  }, []);
+  }, [isDark]);
 
   return (
     <section className={cn(
@@ -321,7 +323,7 @@ export function PixelHero({
       {/* Center: Description */}
       <div className="relative z-10 px-4 sm:px-6 md:px-8 pb-8">
         <div className="mx-auto max-w-xl text-center">
-          <p className="text-sm sm:text-base md:text-lg text-zinc-400 leading-relaxed mb-6">
+          <p className="text-sm sm:text-base md:text-lg text-[var(--lp-text-soft)] leading-relaxed mb-6">
             {description}
           </p>
         </div>
@@ -331,7 +333,7 @@ export function PixelHero({
       <div className="relative z-10 px-4 sm:px-6 md:px-8 pb-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
         <button
           onClick={onPrimaryClick}
-          className="group relative overflow-hidden rounded-full bg-white px-6 py-3 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-medium uppercase tracking-widest text-black transition-all hover:bg-zinc-200"
+          className="group relative overflow-hidden rounded-full bg-[var(--lp-text)] px-6 py-3 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-medium uppercase tracking-widest text-[var(--lp-bg)] transition-all hover:opacity-85"
         >
           <span className="relative z-10 flex items-center gap-2">
             <span className="sm:hidden">{primaryCtaMobile}</span>
@@ -341,7 +343,7 @@ export function PixelHero({
         </button>
         <button
           onClick={onSecondaryClick}
-          className="rounded-full border border-zinc-600 px-6 py-3 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-medium uppercase tracking-widest text-zinc-300 transition-all hover:bg-zinc-800 hover:text-white"
+          className="rounded-full border border-[var(--lp-border-strong)] px-6 py-3 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-medium uppercase tracking-widest text-[var(--lp-text-soft)] transition-all hover:bg-[var(--lp-stripe)]"
         >
           <span className="sm:hidden">{secondaryCtaMobile}</span>
           <span className="hidden sm:inline">{secondaryCta}</span>
@@ -350,13 +352,16 @@ export function PixelHero({
 
       {/* Streaming platforms marquee */}
       <div className="relative z-10 pb-10 pt-6">
-        <p className="text-center text-xs uppercase tracking-[0.3em] text-zinc-500 mb-5">
+        <p className="text-center text-xs uppercase tracking-[0.3em] text-[var(--lp-text-muted)] mb-5">
           Stream everywhere
         </p>
         <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
           <div className="flex w-max animate-marquee gap-14 pr-14">
             {[...BRAND_LOGOS, ...BRAND_LOGOS, ...BRAND_LOGOS, ...BRAND_LOGOS].map(({ name, Logo }, i) => (
-              <div key={i} className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors shrink-0">
+              <div key={i} className={cn(
+                "flex items-center gap-2 transition-colors shrink-0",
+                isDark ? "text-zinc-500 hover:text-zinc-200" : "text-[var(--lp-text-muted)] hover:text-[var(--lp-text)]"
+              )}>
                 <Logo />
                 <span className="text-sm font-medium tracking-wide">{name}</span>
               </div>

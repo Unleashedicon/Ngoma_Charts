@@ -116,7 +116,8 @@ export function ExploreCharts() {
   return (
     <section
       id="explore"
-      className="relative bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 px-4 sm:px-6 md:px-8 pt-20 sm:pt-24 md:pt-32 pb-20"
+      className="relative bg-[var(--lp-surface)] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 px-4 sm:px-6 md:px-8 pt-20 sm:pt-24 md:pt-32 pb-20 transition-colors duration-300"
+      style={{ boxShadow: '0 -2px 0 0 var(--lp-border)' }}
     >
       <FadeIn>
         <h2

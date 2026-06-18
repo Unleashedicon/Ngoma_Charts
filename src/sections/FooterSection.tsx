@@ -1,59 +1,57 @@
 "use client";
 
-import * as React from "react";
 import { Facebook, Instagram, Linkedin, Moon, Send, Sun, Twitter } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router";
+import { useTheme } from "@/hooks/useTheme";
 import { FadeIn } from "@/components/FadeIn";
 
+const QUICK_LINKS = [
+  { label: 'Home',      action: 'home' },
+  { label: 'Charts',    action: 'charts' },
+  { label: 'Trending',  action: 'trending' },
+  { label: 'Artists',   action: 'artists' },
+  { label: 'News',      action: 'news' },
+];
+
 export function FooterSection() {
-  const [isDarkMode, setIsDarkMode] = React.useState(true);
+  const { isDark, toggle } = useTheme();
+  const navigate = useNavigate();
 
-  React.useEffect(() => {
-    const isDark = document.documentElement.classList.contains("dark");
-    setIsDarkMode(isDark);
-  }, []);
-
-  const handleToggle = () => {
-    const root = document.documentElement;
-    if (isDarkMode) {
-      root.classList.remove("dark");
-      localStorage.setItem("ngoma-theme", "light");
-    } else {
-      root.classList.add("dark");
-      localStorage.setItem("ngoma-theme", "dark");
-    }
-    setIsDarkMode(!isDarkMode);
+  const go = (action: string) => {
+    if (action === 'home') window.scrollTo({ top: 0, behavior: 'smooth' });
+    else navigate(`/app#${action}`);
   };
 
   return (
     <footer
       id="contact"
-      className="relative border-t bg-[#0C0C0C] text-[#D7E2EA] transition-colors duration-300"
+      className="relative border-t border-[var(--lp-border)] bg-[var(--lp-surface)] text-[var(--lp-text)] transition-colors duration-300"
     >
       <div className="container mx-auto px-4 py-12 md:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+
           {/* Newsletter */}
           <FadeIn>
             <div className="relative">
               <h2 className="mb-4 text-3xl font-bold tracking-tight">Stay Connected</h2>
-              <p className="mb-6 text-[#9A9C9A]">
+              <p className="mb-6 text-[var(--lp-text-muted)]">
                 Join our newsletter for the latest chart updates and exclusive music insights.
               </p>
               <form className="relative" onSubmit={(e) => e.preventDefault()}>
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full h-10 rounded-md border border-[#262626] bg-[#141414] px-3 py-2 text-sm text-[#F4F3EF] placeholder:text-[#646973] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8800A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C0C0C] pr-12"
+                  className="w-full h-10 rounded-md border border-[var(--lp-border)] bg-[var(--lp-input-bg)] px-3 py-2 text-sm text-[var(--lp-text)] placeholder:text-[var(--lp-text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--lp-gold)] pr-12"
                 />
                 <button
                   type="submit"
-                  className="absolute right-1 top-1 h-8 w-8 rounded-full bg-[#A8800A] text-black flex items-center justify-center transition-transform hover:scale-105"
+                  className="absolute right-1 top-1 h-8 w-8 rounded-full bg-[var(--lp-gold)] text-white flex items-center justify-center transition-transform hover:scale-105"
                 >
                   <Send className="h-4 w-4" />
                   <span className="sr-only">Subscribe</span>
                 </button>
               </form>
-              <div className="absolute -right-4 top-0 h-24 w-24 rounded-full bg-[#A8800A]/10 blur-2xl" />
+              <div className="absolute -right-4 top-0 h-24 w-24 rounded-full bg-[var(--lp-gold)]/10 blur-2xl" />
             </div>
           </FadeIn>
 
@@ -62,11 +60,15 @@ export function FooterSection() {
             <div>
               <h3 className="mb-4 text-lg font-semibold">Quick Links</h3>
               <nav className="space-y-2 text-sm">
-                <a href="#hero" className="block transition-colors hover:text-[#A8800A]">Home</a>
-                <a href="#about" className="block transition-colors hover:text-[#A8800A]">About</a>
-                <a href="#charts" className="block transition-colors hover:text-[#A8800A]">Charts</a>
-                <a href="#albums" className="block transition-colors hover:text-[#A8800A]">Albums</a>
-                <a href="#contact" className="block transition-colors hover:text-[#A8800A]">Contact</a>
+                {QUICK_LINKS.map(({ label, action }) => (
+                  <button
+                    key={label}
+                    onClick={() => go(action)}
+                    className="block w-full text-left text-[var(--lp-text-muted)] transition-colors hover:text-[var(--lp-gold)]"
+                  >
+                    {label}
+                  </button>
+                ))}
               </nav>
             </div>
           </FadeIn>
@@ -75,7 +77,7 @@ export function FooterSection() {
           <FadeIn delay={0.2}>
             <div>
               <h3 className="mb-4 text-lg font-semibold">Contact Us</h3>
-              <address className="space-y-2 text-sm not-italic text-[#9A9C9A]">
+              <address className="space-y-2 text-sm not-italic text-[var(--lp-text-muted)]">
                 <p>Nairobi, Kenya</p>
                 <p>Music Ranking Intelligence</p>
                 <p>Email: hello@ngomacharts.co.ke</p>
@@ -83,7 +85,7 @@ export function FooterSection() {
             </div>
           </FadeIn>
 
-          {/* Social */}
+          {/* Social + Theme toggle */}
           <FadeIn delay={0.3}>
             <div className="relative">
               <h3 className="mb-4 text-lg font-semibold">Follow Us</h3>
@@ -97,44 +99,46 @@ export function FooterSection() {
                   <a
                     key={label}
                     href={href}
-                    className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-[#262626] bg-transparent text-[#D7E2EA] hover:bg-[#D7E2EA]/10 transition-colors"
+                    className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-[var(--lp-border)] text-[var(--lp-text-muted)] hover:bg-[var(--lp-stripe)] hover:text-[var(--lp-gold)] transition-colors"
                     aria-label={label}
                   >
                     <Icon className="h-4 w-4" />
                   </a>
                 ))}
               </div>
-              <div className="flex items-center space-x-2">
-                <Sun className="h-4 w-4 text-[#A8800A]" />
+              <div className="flex items-center gap-3">
+                <Sun className="h-4 w-4 text-[var(--lp-gold)]" />
                 <button
-                  onClick={handleToggle}
-                  className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8800A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C0C0C]"
-                  style={{ backgroundColor: isDarkMode ? '#A8800A' : '#262626' }}
+                  onClick={toggle}
+                  className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--lp-gold)]"
+                  style={{ backgroundColor: isDark ? 'var(--lp-gold)' : 'var(--lp-border-strong)' }}
                   role="switch"
-                  aria-checked={isDarkMode}
+                  aria-checked={isDark}
+                  aria-label="Toggle dark mode"
                 >
                   <span
-                    className={cn(
-                      'pointer-events-none block h-5 w-5 rounded-full bg-[#0C0C0C] shadow-lg ring-0 transition-transform',
-                      isDarkMode ? 'translate-x-5' : 'translate-x-0'
-                    )}
+                    className={`pointer-events-none block h-5 w-5 rounded-full bg-white shadow-md ring-0 transition-transform ${
+                      isDark ? 'translate-x-5' : 'translate-x-0'
+                    }`}
                   />
                 </button>
-                <Moon className="h-4 w-4 text-[#646973]" />
-                <span className="sr-only">Toggle dark mode</span>
+                <Moon className="h-4 w-4 text-[var(--lp-text-muted)]" />
+                <span className="text-xs text-[var(--lp-text-muted)] uppercase tracking-wider">
+                  {isDark ? 'Dark' : 'Light'}
+                </span>
               </div>
             </div>
           </FadeIn>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[#262626] pt-8 text-center md:flex-row">
-          <p className="text-sm text-[#646973]">
-            &copy; 2025 Ngoma Charts. All rights reserved.
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[var(--lp-border)] pt-8 text-center md:flex-row">
+          <p className="text-sm text-[var(--lp-text-muted)]">
+            &copy; 2026 Ngoma Charts. All rights reserved.
           </p>
-          <nav className="flex gap-4 text-sm">
-            <a href="#" className="transition-colors hover:text-[#A8800A]">Privacy Policy</a>
-            <a href="#" className="transition-colors hover:text-[#A8800A]">Terms of Service</a>
-            <a href="#" className="transition-colors hover:text-[#A8800A]">Cookie Settings</a>
+          <nav className="flex gap-4 text-sm text-[var(--lp-text-muted)]">
+            <a href="#" className="transition-colors hover:text-[var(--lp-gold)]">Privacy Policy</a>
+            <a href="#" className="transition-colors hover:text-[var(--lp-gold)]">Terms of Service</a>
+            <a href="#" className="transition-colors hover:text-[var(--lp-gold)]">Cookie Settings</a>
           </nav>
         </div>
       </div>

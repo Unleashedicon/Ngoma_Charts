@@ -58,10 +58,10 @@ export function NewsSection() {
   return (
     <section
       id="news"
-      className="bg-[#0C0C0C] px-5 sm:px-8 md:px-10 pt-10 pb-24 sm:pb-28 md:pb-32"
+      className="bg-[var(--lp-bg)] px-5 sm:px-8 md:px-10 pt-10 pb-24 sm:pb-28 md:pb-32 transition-colors duration-300"
     >
       <h2
-        className="font-black uppercase leading-none tracking-tight text-center text-white mb-16 sm:mb-20 md:mb-28"
+        className="font-black uppercase leading-none tracking-tight text-center hero-heading mb-16 sm:mb-20 md:mb-28"
         style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
       >
         News
@@ -79,20 +79,20 @@ export function NewsSection() {
                   loading="lazy"
                 />
               </div>
-              <span className="text-[#D7E2EA]/50 uppercase tracking-widest text-xs font-medium">
+              <span className="text-[var(--lp-text-muted)] uppercase tracking-widest text-xs font-medium">
                 {item.date}
               </span>
-              <h3 className="text-[#D7E2EA] font-medium uppercase leading-tight text-xl sm:text-2xl text-balance">
+              <h3 className="text-[var(--lp-text)] font-medium uppercase leading-tight text-xl sm:text-2xl text-balance">
                 {item.title}
               </h3>
-              <p className="text-[#D7E2EA]/60 font-light leading-relaxed text-sm sm:text-base text-pretty">
+              <p className="text-[var(--lp-text-soft)] font-light leading-relaxed text-sm sm:text-base text-pretty">
                 {item.excerpt}
               </p>
               <Link
                 to="/app#news"
-                className="text-[#D7E2EA] uppercase tracking-widest text-xs font-medium transition-opacity duration-200 hover:opacity-70"
+                className="text-[var(--lp-gold)] uppercase tracking-widest text-xs font-semibold transition-opacity duration-200 hover:opacity-70"
               >
-                Read more
+                Read more →
               </Link>
             </article>
           </FadeIn>

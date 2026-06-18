@@ -21,7 +21,7 @@ function MovementBadge({ movement, size = 'sm' }: MovementBadgeProps) {
     return (
       <span
         className={cn(
-          'inline-flex items-center rounded-md bg-[#A8800A] font-bold text-black',
+          'inline-flex items-center rounded-md bg-[var(--lp-gold)] font-bold text-white',
           dims,
           size === 'sm' && 'text-[10px] px-1'
         )}
@@ -36,7 +36,7 @@ function MovementBadge({ movement, size = 'sm' }: MovementBadgeProps) {
       ? 'bg-green-600 text-white'
       : movement === 'down'
       ? 'bg-red-600 text-white'
-      : 'bg-zinc-700 text-zinc-300';
+      : 'bg-[var(--lp-stripe)] text-[var(--lp-text-muted)]';
 
   const Icon = movement === 'up' ? ArrowUp : movement === 'down' ? ArrowDown : Minus;
 
@@ -74,19 +74,19 @@ export function ChartLeaderboard() {
   const [leader, ...rest] = chartEntries;
 
   return (
-    <section id="charts" className="bg-[#0C0C0C] px-4 pt-16 pb-0 sm:px-8 md:pt-24">
+    <section id="charts" className="bg-[var(--lp-bg)] px-4 pt-16 pb-0 sm:px-8 md:pt-24 transition-colors duration-300">
       <div className="mx-auto max-w-6xl">
         <FadeIn>
           <div className="text-center">
-            <h2 className="text-4xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-6xl font-kanit">
+            <h2 className="text-4xl font-black uppercase tracking-tight text-[var(--lp-text)] sm:text-5xl md:text-6xl font-kanit">
               Ngoma Top 10
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-sm text-[#9A9C9A] sm:text-base">
+            <p className="mx-auto mt-3 max-w-2xl text-sm text-[var(--lp-text-muted)] sm:text-base">
               The top performing songs across radio and streaming platforms in Kenya this week.
             </p>
             <Link
               to="/app#charts"
-              className="inline-flex items-center gap-2 mt-5 text-xs uppercase tracking-widest text-[#A8800A] hover:text-[#c2990b] transition-colors"
+              className="inline-flex items-center gap-2 mt-5 text-xs uppercase tracking-widest text-[var(--lp-gold)] hover:opacity-70 transition-opacity"
             >
               View full Top 50 <ArrowRight className="h-3 w-3" />
             </Link>
@@ -94,14 +94,13 @@ export function ChartLeaderboard() {
         </FadeIn>
       </div>
 
-      {/* Coverflow ring — full bleed */}
+      {/* Coverflow ring */}
       <FadeIn delay={0.15}>
         <CoverflowRing covers={ringCovers} />
       </FadeIn>
 
-      {/* Caption */}
       <FadeIn delay={0.2}>
-        <p className="text-center text-[10px] sm:text-xs uppercase tracking-[0.3em] text-zinc-600 mb-10 sm:mb-14">
+        <p className="text-center text-[10px] sm:text-xs uppercase tracking-[0.3em] text-[var(--lp-text-muted)] mb-10 sm:mb-14">
           Top albums in rotation
         </p>
       </FadeIn>
@@ -121,22 +120,22 @@ export function ChartLeaderboard() {
                   <img
                     src={leader.coverUrl}
                     alt={`${leader.title} cover art`}
-                    className="aspect-square w-full rounded-md object-cover"
+                    className="aspect-square w-full rounded-md object-cover shadow-md"
                   />
                 </div>
                 <div className="mt-4 text-center md:text-left">
-                  <p className="text-xl font-bold text-white sm:text-2xl">{leader.title}</p>
-                  <p className="mt-1 text-sm text-[#9A9C9A] sm:text-base">{leader.artist}</p>
+                  <p className="text-xl font-bold text-[var(--lp-text)] sm:text-2xl">{leader.title}</p>
+                  <p className="mt-1 text-sm text-[var(--lp-text-muted)] sm:text-base">{leader.artist}</p>
                 </div>
               </div>
             </FadeIn>
           )}
 
-          <ol className="flex flex-col divide-y divide-[#262626]">
+          <ol className="flex flex-col divide-y divide-[var(--lp-border)]">
             {rest.map((entry, idx) => (
               <FadeIn key={entry.rank} delay={0.05 * (idx + 1)}>
-                <li className="flex items-center gap-4 py-3 transition-colors hover:bg-white/5 sm:gap-5">
-                  <span className="w-6 shrink-0 text-right text-base font-bold text-white sm:text-lg">
+                <li className="flex items-center gap-4 py-3 rounded-lg transition-colors hover:bg-[var(--lp-stripe)] sm:gap-5 px-2 -mx-2">
+                  <span className="w-6 shrink-0 text-right text-base font-bold text-[var(--lp-text)] sm:text-lg">
                     {entry.rank}
                   </span>
                   <div className="shrink-0">
@@ -148,10 +147,10 @@ export function ChartLeaderboard() {
                     className="h-10 w-10 shrink-0 rounded object-cover sm:h-12 sm:w-12"
                   />
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-white sm:text-base">
+                    <p className="truncate text-sm font-semibold text-[var(--lp-text)] sm:text-base">
                       {entry.title}
                     </p>
-                    <p className="truncate text-xs text-[#9A9C9A] sm:text-sm">{entry.artist}</p>
+                    <p className="truncate text-xs text-[var(--lp-text-muted)] sm:text-sm">{entry.artist}</p>
                   </div>
                 </li>
               </FadeIn>

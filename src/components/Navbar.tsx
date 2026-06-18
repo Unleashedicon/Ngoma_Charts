@@ -39,13 +39,13 @@ export function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled || menuOpen
-          ? 'bg-[#0C0C0C]/95 backdrop-blur-md border-b border-[#262626]'
+          ? 'bg-[var(--lp-bg)]/95 backdrop-blur-md border-b border-[var(--lp-border)]'
           : 'bg-transparent'
       }`}
     >
       {/* Utility bar */}
-      <div className="bg-[#1A1A1A] px-4 py-1 text-center">
-        <p className="text-[10px] sm:text-xs text-[#746159] uppercase tracking-widest">
+      <div className="bg-[var(--lp-utility-bar)] px-4 py-1 text-center">
+        <p className="text-[10px] sm:text-xs text-[var(--lp-text-muted)] uppercase tracking-widest">
           June 2026 — Ngoma Top 50 (Kenya) — Combined Chart
         </p>
       </div>
@@ -56,13 +56,13 @@ export function Navbar() {
           onClick={scrollToTop}
           className="flex items-baseline gap-1 shrink-0"
         >
-          <span className="text-lg sm:text-xl md:text-2xl font-black uppercase tracking-tight text-[#F4F3EF]">
+          <span className="text-lg sm:text-xl md:text-2xl font-black uppercase tracking-tight text-[var(--lp-text)]">
             NGOMA
           </span>
-          <span className="text-lg sm:text-xl md:text-2xl font-black uppercase tracking-tight text-[#A8800A]">
+          <span className="text-lg sm:text-xl md:text-2xl font-black uppercase tracking-tight text-[var(--lp-gold)]">
             CHARTS
           </span>
-          <span className="text-[10px] sm:text-xs text-[#A8800A] font-medium ml-0.5 hidden sm:inline">
+          <span className="text-[10px] sm:text-xs text-[var(--lp-gold)] font-medium ml-0.5 hidden sm:inline">
             (KENYA)
           </span>
         </button>
@@ -75,8 +75,8 @@ export function Navbar() {
               onClick={() => goTo(link.hash)}
               className={`px-3 py-1.5 rounded-full text-xs font-medium uppercase tracking-wider transition-all ${
                 link.label === 'Charts'
-                  ? 'bg-[#2A2316] text-[#F4F3EF]'
-                  : 'text-[#9A9C9A] hover:text-[#F4F3EF]'
+                  ? 'bg-[var(--lp-gold-soft)] text-[var(--lp-gold)] border border-[var(--lp-gold-border)]'
+                  : 'text-[var(--lp-text-muted)] hover:text-[var(--lp-text)]'
               }`}
             >
               {link.label}
@@ -84,29 +84,29 @@ export function Navbar() {
           ))}
         </div>
 
-        {/* Right side: theme toggle + hamburger */}
+        {/* Right: theme toggle + hamburger */}
         <div className="flex items-center gap-2 sm:gap-3">
           <button
             onClick={toggle}
-            className="flex items-center gap-2 rounded-full border border-[#262626] px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium uppercase tracking-wider text-[#D7E2EA] transition-all hover:bg-[#262626]"
+            className="flex items-center gap-2 rounded-full border border-[var(--lp-border)] px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium uppercase tracking-wider text-[var(--lp-text-soft)] transition-all hover:bg-[var(--lp-card-border)]"
           >
             {isDark ? (
               <>
-                <Moon className="h-3.5 w-3.5 text-[#A8800A]" />
+                <Moon className="h-3.5 w-3.5 text-[var(--lp-gold)]" />
                 <span className="hidden sm:inline">Light</span>
               </>
             ) : (
               <>
-                <Sun className="h-3.5 w-3.5 text-[#A8800A]" />
+                <Sun className="h-3.5 w-3.5 text-[var(--lp-gold)]" />
                 <span className="hidden sm:inline">Dark</span>
               </>
             )}
           </button>
 
-          {/* Hamburger — visible below lg */}
+          {/* Hamburger */}
           <button
             onClick={() => setMenuOpen((o) => !o)}
-            className="lg:hidden flex items-center justify-center w-9 h-9 rounded-full border border-[#262626] text-[#D7E2EA] hover:bg-[#262626] transition-colors"
+            className="lg:hidden flex items-center justify-center w-9 h-9 rounded-full border border-[var(--lp-border)] text-[var(--lp-text-soft)] hover:bg-[var(--lp-card-border)] transition-colors"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           >
             {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -114,21 +114,21 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile dropdown menu */}
+      {/* Mobile dropdown */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300 ${
           menuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="bg-[#0C0C0C]/98 border-t border-[#1E1E1E] px-4 py-3 flex flex-col gap-1">
+        <div className="bg-[var(--lp-bg)]/98 border-t border-[var(--lp-border)] px-4 py-3 flex flex-col gap-1">
           {navLinks.map((link) => (
             <button
               key={link.label}
               onClick={() => goTo(link.hash)}
               className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium uppercase tracking-wider transition-colors ${
                 link.label === 'Charts'
-                  ? 'bg-[#2A2316] text-[#F4F3EF]'
-                  : 'text-[#9A9C9A] hover:text-[#F4F3EF] hover:bg-[#161616]'
+                  ? 'bg-[var(--lp-gold-soft)] text-[var(--lp-gold)]'
+                  : 'text-[var(--lp-text-muted)] hover:text-[var(--lp-text)] hover:bg-[var(--lp-stripe)]'
               }`}
             >
               {link.label}
@@ -137,7 +137,7 @@ export function Navbar() {
         </div>
       </div>
 
-      {scrolled && !menuOpen && <div className="h-px bg-[#2E2E2E]" />}
+      {scrolled && !menuOpen && <div className="h-px bg-[var(--lp-border)]" />}
     </nav>
   );
 }

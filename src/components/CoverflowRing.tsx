@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useTheme } from '@/hooks/useTheme';
 
 type Cover = { src: string; alt: string };
 
@@ -17,6 +18,8 @@ function getBreakpoint(): Breakpoint {
 }
 
 export function CoverflowRing({ covers }: { covers: Cover[] }) {
+  const { isDark } = useTheme();
+  const fadeBg = isDark ? '#0C0C0C' : '#F6F3ED';
   const [bp, setBp] = useState<Breakpoint>(getBreakpoint);
 
   useEffect(() => {
@@ -40,8 +43,8 @@ export function CoverflowRing({ covers }: { covers: Cover[] }) {
       />
 
       {/* Top & bottom fade into section bg */}
-      <div className="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-14 z-10 pointer-events-none" style={{ background: `linear-gradient(to bottom, ${fadeBg}, transparent)` }} />
+      <div className="absolute inset-x-0 bottom-0 h-14 z-10 pointer-events-none" style={{ background: `linear-gradient(to top, ${fadeBg}, transparent)` }} />
 
       {/* 3D stage */}
       <div
