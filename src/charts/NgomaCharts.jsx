@@ -2213,7 +2213,7 @@ const top = data[0];
           </div>
         </div>
           <div style={{...pageFrame({display:"flex",justifyContent:"space-between",alignItems:"center",padding:isMobile?"14px 16px":"18px 28px 22px"}),columnGap:isMobile?"16px":"60px",rowGap:"16px",flexWrap:"wrap"}}>
-          <div onClick={()=>navigate("/")} style={{display:"flex",alignItems:"center",gap:"14px",cursor:"pointer"}}>
+          <div onClick={()=>{window.location.href="/";}} style={{display:"flex",alignItems:"center",gap:"14px",cursor:"pointer"}}>
             <svg width={isMobile?"24":"32"} height={isMobile?"26":"34"} viewBox="0 0 22 24" style={{flexShrink:0}}>
               <rect x="0" y="15" width="3.5" height="9" fill={themeColors.text} rx="0.5"/>
               <rect x="5.5" y="10" width="3.5" height="14" fill={themeColors.text} rx="0.5"/>
