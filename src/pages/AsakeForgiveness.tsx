@@ -212,7 +212,7 @@ export function AsakeForgiveness() {
           <motion.h1
             className="asake-gold-text"
             initial={{ opacity:0, y:50 }} animate={{ opacity:1, y:0 }} transition={{ duration:1.1, delay:.25, ease:[0.22,1,0.36,1] }}
-            style={{ fontSize:"clamp(3rem,16vw,12rem)", fontWeight:900, lineHeight:.88, textTransform:"uppercase", letterSpacing:"-0.02em", margin:"0 0 22px" }}>
+            style={{ fontSize:"clamp(3rem,10vw,7.5rem)", fontWeight:900, lineHeight:.88, textTransform:"uppercase", letterSpacing:"-0.02em", margin:"0 0 22px" }}>
             Forgiveness
           </motion.h1>
 
