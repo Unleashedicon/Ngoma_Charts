@@ -17,9 +17,9 @@ function getBreakpoint(): Breakpoint {
   return w < 640 ? 'sm' : w < 1024 ? 'md' : 'lg';
 }
 
-export function CoverflowRing({ covers }: { covers: Cover[] }) {
+export function CoverflowRing({ covers, fadeBg: fadeBgProp }: { covers: Cover[]; fadeBg?: string }) {
   const { isDark } = useTheme();
-  const fadeBg = isDark ? '#0C0C0C' : '#F6F3ED';
+  const fadeBg = fadeBgProp ?? (isDark ? '#0C0C0C' : '#F6F3ED');
   const [bp, setBp] = useState<Breakpoint>(getBreakpoint);
 
   useEffect(() => {
